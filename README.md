@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Jogo da Memória do Amor 💘</title>
-  <link rel="stylesheet" href="style.css">
+<title>Jogo da Memória do Amor 💘</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(#ffc0cb, #ffe4e1);
@@ -15,18 +14,17 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
+      text-align: center; /* Centraliza tudo dentro do body */
     }
 
     h1 {
       color: #d6336c;
       margin-top: 40px;
-      text-align: center; /* Centralizado */
     }
 
     .instrucoes {
       font-size: 1.2rem;
       margin-bottom: 20px;
-      text-align: center; /* Centralizado */
     }
 
     .tabuleiro {
@@ -34,6 +32,7 @@
       grid-template-columns: repeat(4, 100px);
       gap: 15px;
       justify-content: center;
+      margin-bottom: 30px;
     }
 
     .carta {
@@ -48,6 +47,7 @@
       cursor: pointer;
       font-size: 2rem;
       transition: transform 0.3s ease;
+      user-select: none;
     }
 
     .carta.virada {
@@ -56,12 +56,11 @@
     }
 
     #vitoria {
-      margin-top: 30px;
-      text-align: center;
       background: #fff0f5;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 300px;
     }
 
     .escondido {
@@ -96,7 +95,7 @@
       carta.classList.add('carta');
       carta.dataset.valor = emoji;
       carta.dataset.index = index;
-      carta.innerHTML = '';
+      carta.innerHTML = ''; // começa sem mostrar
 
       carta.addEventListener('click', () => {
         if (bloqueado || carta.classList.contains('virada')) return;
@@ -107,8 +106,31 @@
         if (!primeiraCarta) {
           primeiraCarta = carta;
         } else {
-          if (primeiraCarta.dataset.valor === carta.dataset.valor && primeiraCarta.dataset.index !== carta.dataset.index) {
+          if (
+            primeiraCarta.dataset.valor === carta.dataset.valor &&
+            primeiraCarta.dataset.index !== carta.dataset.index
+          ) {
             primeiraCarta = null;
             paresEncontrados++;
             if (paresEncontrados === emojis.length) {
-              document.getElementById('vitoria').classList.remove('esco
+              document.getElementById('vitoria').classList.remove('escondido');
+            }
+          } else {
+            bloqueado = true;
+            setTimeout(() => {
+              primeiraCarta.classList.remove('virada');
+              primeiraCarta.innerHTML = '';
+              carta.classList.remove('virada');
+              carta.innerHTML = '';
+              primeiraCarta = null;
+              bloqueado = false;
+            }, 1000);
+          }
+        }
+      });
+
+      tabuleiro.appendChild(carta);
+    });
+  </script>
+</body>
+</html>
