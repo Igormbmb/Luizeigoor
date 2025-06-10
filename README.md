@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Jogo da Memória do Amor</title>
+  <title>Jogo da Memória do Amor 💘</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
@@ -15,20 +16,26 @@
       justify-content: flex-start;
       min-height: 100vh;
     }
+
     h1 {
       color: #d6336c;
       margin-top: 40px;
+      text-align: center; /* Centralizado */
     }
+
     .instrucoes {
       font-size: 1.2rem;
       margin-bottom: 20px;
+      text-align: center; /* Centralizado */
     }
+
     .tabuleiro {
       display: grid;
       grid-template-columns: repeat(4, 100px);
       gap: 15px;
       justify-content: center;
     }
+
     .carta {
       width: 100px;
       height: 100px;
@@ -42,10 +49,12 @@
       font-size: 2rem;
       transition: transform 0.3s ease;
     }
+
     .carta.virada {
       background-color: #fff0f5;
       transform: rotateY(180deg);
     }
+
     #vitoria {
       margin-top: 30px;
       text-align: center;
@@ -54,6 +63,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
     .escondido {
       display: none;
     }
@@ -62,7 +72,9 @@
 <body>
   <h1>Jogo da Memória do Amor 💘</h1>
   <p class="instrucoes">Encontre todos os pares!</p>
+
   <div class="tabuleiro" id="tabuleiro"></div>
+
   <div id="vitoria" class="escondido">
     <h2>Parabéns, amor da minha vida! ❤️</h2>
     <p>Você completou nosso jogo da memória.<br>
@@ -99,24 +111,4 @@
             primeiraCarta = null;
             paresEncontrados++;
             if (paresEncontrados === emojis.length) {
-              document.getElementById('vitoria').classList.remove('escondido');
-            }
-          } else {
-            bloqueado = true;
-            setTimeout(() => {
-              primeiraCarta.classList.remove('virada');
-              primeiraCarta.innerHTML = '';
-              carta.classList.remove('virada');
-              carta.innerHTML = '';
-              primeiraCarta = null;
-              bloqueado = false;
-            }, 1000);
-          }
-        }
-      });
-
-      tabuleiro.appendChild(carta);
-    });
-  </script>
-</body>
-</html>
+              document.getElementById('vitoria').classList.remove('esco
